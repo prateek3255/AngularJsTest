@@ -1,0 +1,20 @@
+<html ng-app>
+    <head>
+        <script src="angular.js"></script>
+        <style>
+            #red{
+                color :red;
+            }
+            .blue{
+                color: blue;
+            }
+        </style>
+    </head>
+    <body>
+        <input id="input1" type="text" ng-model="text">
+        <p id="{{text}}" class="{{text}}">hello {{text}}</p>
+        <img src="{{text}}" alt="">
+    </body>
+
+
+</html>

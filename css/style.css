@@ -1,0 +1,24 @@
+.style1{
+    background: red;
+}
+#logo{
+    background: pink;
+    font-family: 'Times New Roman', Times, serif;
+}
+div{
+    border: 3px solid black;
+    font-style: italic;
+}
+.test{
+
+}
+span{
+    padding: 20px;
+    background: yellow;
+    margin: 10px;
+}
+body{
+    margin:0;
+    padding:0;
+    background-image:url("backg.jpg");
+}

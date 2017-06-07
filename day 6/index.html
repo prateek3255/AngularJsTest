@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>
+            Bsic DOM
+        </title>
+    </head>
+    <body>
+        <input id="input1" type="text" onkeypress="changeText()">
+        <p id="para1">hello</p>
+        <button onclick="changeText()" >change</button>
+        <script>
+         function changeText(){
+               var i= document.getElementById("input1");
+           console.log(i.value);
+           var o=document.getElementById("para1");
+           o.innerText=i.value;
+         }
+        </script>
+    </body>
+</html>
