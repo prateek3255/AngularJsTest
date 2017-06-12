@@ -10,7 +10,7 @@
         <div ng-controller="firstCtrl as todo">
              <div class="row">
                  <div class="col-xs-6">
-                     <input type="text" class="form-control" ng-model="todo.task">
+                     <input type="text" class="form-control" ng-model="todo.task" >
                  </div>
                  <div class="col-xs-6">
                      <button ng-if="!todo.editMode" class="btn btn-success btn-block" ng-click="todo.task && todo.addTask()">Add Task</button>
@@ -24,9 +24,15 @@
                      <ul class="list-group">
                          <li class="list-group-item" ng-repeat="task in todo.tasks track by $index">
                              <div class="row">
-                                <div class="col-xs-10">{{$index+1}}. {{task}}</div>
-                                <div class="col-xs-1"><button class="btn btn-danger" ng-click="todo.deleteTask($index)">Delete</button></div>
-                                <div class="col-xs-1"> <button class="btn btn-warning" ng-click="todo.editTask($index)">Edit</button></div>
+                                <div class="col-xs-9" ng-if="task.status==0" >{{$index+1}}. {{task.name}}</div>
+                                <div class="col-xs-9" ng-if="task.status==1" ><s>{{$index+1}}. {{task.name}}</s></div>
+                                <div class="col-xs-1">
+                                    <button ng-if="task.status==0" class="btn btn-info btn-block" ng-click="todo.setStatus($index)">Pending</button>
+                                    <div ng-if="task.status==1" class="btn btn-success ">Completed</div>
+                                </div>
+                                <div class="col-xs-1"> <button class="btn btn-warning btn-block" ng-click="todo.editTask($index)">Edit</button></div>
+                                <div class="col-xs-1"><button class="btn btn-danger btn-block" ng-click="todo.deleteTask($index)">Delete</button></div>
+                                
                              </div>
                          </li>
                          <!--<li class="list-group-item">Task2</li>-->

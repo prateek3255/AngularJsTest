@@ -7,9 +7,14 @@ function firstCtrl(){
     todo.addTask=addTask;
     todo.editMode=false;
     todo.saveIndex=0;
+    // taskObj={};
+    
 
     function addTask(){
-        todo.tasks.push(todo.task);
+        taskObj={};
+        taskObj.name=todo.task;
+        taskObj.status=0;
+        todo.tasks.push(taskObj);
         todo.task="";
         console.log(todo.tasks);
     }
@@ -17,13 +22,16 @@ function firstCtrl(){
         todo.tasks.splice(i,1);
     }
     todo.editTask=function(i){
-        todo.task=todo.tasks[i];
+        todo.task=todo.tasks[i].name;
         todo.editMode=true;
         todo.saveIndex=i;
     }
     todo.updateTask=function(i){
-        todo.tasks[todo.saveIndex]=todo.task;
+        todo.tasks[todo.saveIndex].name=todo.task;
         todo.editMode=false;
         todo.task="";
+    }
+    todo.setStatus=function(i){
+        todo.tasks[i].status=1;
     }
 }
