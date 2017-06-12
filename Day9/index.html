@@ -3,22 +3,27 @@
     <link rel="stylesheet" href="bower_components/flag-icon-css/css/flag-icon.css">
     <script src="bower_components/angular/angular.js"></script>
     <script src="app.js"></script>
+     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+     <link rel="stylesheet" href="style.css">
+     <title>Flag Game</title>
     </head>
     <body ng-app="flag">
 
         <div ng-controller="flagCtrl as flag">
                 <!--{{flag.name}}-->
-                <button ng-click="flag.flagGen()">Fire</button>       
-                <span class="flag-icon flag-icon-{{flag.randomCode}}"></span><br><br><br>
+                <button ng-click="flag.flagGen()" class="btn btn-primary btn-rounded">Fire</button>       
+                <span class="flag-icon flag-icon-{{flag.randomCode}}"  style="height:100px; width:100px;"></span><br><br><br>
                 <!--<input type="text" ng-model="flag.nation">-->
-                 <button ng-click="flag.check0()">{{flag.flags[0]}}</button><br><br>
-                 <button ng-click="flag.check1()">{{flag.flags[1]}}</button><br><br>
-                 <button ng-click="flag.check2()">{{flag.flags[2]}}</button><br><br>
-                 <button ng-click="flag.check3()">{{flag.flags[3]}}</button><br><br>
+                 <button ng-click="flag.check0()" class="btn blue">{{flag.flags[0]}}</button><br><br>
+                 <button ng-click="flag.check1()" class="btn orange">{{flag.flags[1]}}</button><br><br>
+                 <button ng-click="flag.check2()" class="btn green">{{flag.flags[2]}}</button><br><br>
+                 <button ng-click="flag.check3()" class="btn red">{{flag.flags[3]}}</button><br><br>
 
-                <h1 ng-if="flag.correct==1">This is Correct !!</h1>
-                <h1 ng-if="flag.correct==0">This is Wrong !! Correct answer is {{flag.correctNation}} </h1>
-  
+                <!--<h1 ng-if="flag.correct==1">This is Correct !!</h1>
+                <h1 ng-if="flag.correct==0">This is Wrong !! Correct answer is {{flag.correctNation}} </h1>-->
+
+                <h2>Score - {{flag.score}}</h2>   
+                <h3>High Score - {{flag.hScore}}</h3> 
       
 
 

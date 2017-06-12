@@ -9,6 +9,9 @@ var flag = this;
 
 flag.flagGen = flagGen;
 
+flag.score=0;
+flag.hScore=0;
+
 function flagGen(){
     flag.correct=-1;
     var r1  = Math.round(Math.random()*(nations.length-1));
@@ -47,10 +50,10 @@ function flagGen(){
         f4=3;
 
     flag.flags=["","","",""];
-    flag.flags[f1]=flag.correctNation;
-    flag.flags[f2]=flag.nation2;
-    flag.flags[f3]=flag.nation3;
-    flag.flags[f4]=flag.nation4;
+    flag.flags[f1]=flag.correctNation.toUpperCase();
+    flag.flags[f2]=flag.nation2.toUpperCase();
+    flag.flags[f3]=flag.nation3.toUpperCase();
+    flag.flags[f4]=flag.nation4.toUpperCase();
 
     console.log(flag.flags);
     console.log(flag.correctNation, flag.nation2,flag.nation3,flag.nation4);
@@ -59,31 +62,83 @@ function flagGen(){
 
 
 flag.check0=function(){
-    if(flag.flags[0]==flag.correctNation)
-        flag.correct=1;
-    else
-        flag.correct=0;
+    // if(flag.flags[0]==flag.correctNation)
+    //     flag.correct=1;
+    // else
+    //     flag.correct=0;
+    if(flag.flags[0]==flag.correctNation.toUpperCase()){
+        alert("Well done!! "+flag.correctNation+" is correct answer");
+        flag.score=flag.score+1;
+        flag.flagGen();
+    }
+    else{
+        alert("Sorry wrong answer, correct answer was "+flag.correctNation);
+        alert("Game Over!! Your Score = "+flag.score);
+        if(flag.score>flag.hScore)
+            flag.hScore=flag.score;
+        flag.score=0;
+        flag.flagGen();
+    }
 }
 
 flag.check1=function(){
-    if(flag.flags[1]==flag.correctNation)
-        flag.correct=1;
-    else
-        flag.correct=0;
+    // if(flag.flags[1]==flag.correctNation)
+    //     flag.correct=1;
+    // else
+    //     flag.correct=0;
+    if(flag.flags[1]==flag.correctNation.toUpperCase()){
+        alert("Well done!! "+flag.correctNation+" is correct answer");
+        flag.score=flag.score+1;
+        flag.flagGen();
+    }
+    else{
+        alert("Sorry wrong answer, correct answer was "+flag.correctNation);
+        alert("Game Over!! Your Score = "+flag.score);
+        if(flag.score>flag.hScore)
+            flag.hScore=flag.score;
+        flag.score=0;
+        flag.flagGen();
+    }
 }
 
 flag.check2=function(){
-    if(flag.flags[2]==flag.correctNation)
-        flag.correct=1;
-    else
-        flag.correct=0;
+    // if(flag.flags[2]==flag.correctNation)
+    //     flag.correct=1;
+    // else
+    //     flag.correct=0;
+    if(flag.flags[2]==flag.correctNation.toUpperCase()){
+        alert("Well done!! "+flag.correctNation+" is correct answer");
+        flag.score=flag.score+1;
+        flag.flagGen();
+    }
+    else{
+        alert("Sorry wrong answer, correct answer was "+flag.correctNation);
+        alert("Game Over!! Your Score = "+flag.score);
+        if(flag.score>flag.hScore)
+            flag.hScore=flag.score;
+        flag.score=0;
+        flag.flagGen();
+    }
 }
 
 flag.check3=function(){
-    if(flag.flags[3]==flag.correctNation)
-        flag.correct=1;
-    else
-        flag.correct=0;
+    // if(flag.flags[3]==flag.correctNation)
+    //     flag.correct=1;
+    // else
+    //     flag.correct=0;
+    if(flag.flags[3]==flag.correctNation.toUpperCase()){
+        alert("Well done!! "+flag.correctNation+" is correct answer");
+        flag.score=flag.score+1;
+        flag.flagGen();
+    }
+    else{
+        alert("Sorry wrong answer, correct answer was "+flag.correctNation);
+        alert("Game Over!! Your Score = "+flag.score);
+        if(flag.score>flag.hScore)
+            flag.hScore=flag.score;
+        flag.score=0;
+        flag.flagGen();
+    }
 }
 
 

@@ -1,0 +1,45 @@
+<html ng-app="todoApp">
+    <head>
+        <script src="angular.js"></script>
+        <script src="app.js"></script>
+         <link rel="stylesheet" href="bootstrap.css">
+         <title>angular controller</title>
+    </head>
+    <body>
+
+        <div ng-controller="firstCtrl as todo">
+             <div class="row">
+                 <div class="col-xs-6">
+                     <input type="text" class="form-control" ng-model="todo.task">
+                 </div>
+                 <div class="col-xs-6">
+                     <button ng-if="!todo.editMode" class="btn btn-success btn-block" ng-click="todo.task && todo.addTask()">Add Task</button>
+                     <button ng-if="todo.editMode" class="btn btn-info btn-block" ng-click="todo.updateTask()">Update Task</button>
+                 </div>
+
+
+             </div>
+             <div class="row">
+                 <div class="col-xs-12">
+                     <ul class="list-group">
+                         <li class="list-group-item" ng-repeat="task in todo.tasks track by $index">
+                             <div class="row">
+                                <div class="col-xs-10">{{$index+1}}. {{task}}</div>
+                                <div class="col-xs-1"><button class="btn btn-danger" ng-click="todo.deleteTask($index)">Delete</button></div>
+                                <div class="col-xs-1"> <button class="btn btn-warning" ng-click="todo.editTask($index)">Edit</button></div>
+                             </div>
+                         </li>
+                         <!--<li class="list-group-item">Task2</li>-->
+                     </ul>
+                     
+                 </div>
+
+             </div>
+
+        </div>
+    </body>
+
+
+        
+    
+</html>
