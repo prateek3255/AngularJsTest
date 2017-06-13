@@ -2,7 +2,7 @@
     <head>
         <script src="angular.js"></script>
         <script src="app.js"></script>
-         <link rel="stylesheet" href="bootstrap.css">
+         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
          <title>angular controller</title>
     </head>
     <body>
@@ -14,25 +14,46 @@
                  </div>
                  <div class="col-xs-6">
                      <button ng-if="!todo.editMode" class="btn btn-success btn-block" ng-click="todo.task && todo.addTask()">Add Task</button>
-                     <button ng-if="todo.editMode" class="btn btn-info btn-block" ng-click="todo.updateTask()">Update Task</button>
+                     <button ng-if="todo.editMode" class="btn btn-info btn-block" ng-click="todo.task && todo.updateTask()">Update Task</button>
                  </div>
 
 
              </div>
              <div class="row">
                  <div class="col-xs-12">
+                     <div class="btn btn-default btn-block">{{todo.completedTasks}}/{{todo.totalTasks}} Completed</div>
                      <ul class="list-group">
-                         <li class="list-group-item" ng-repeat="task in todo.tasks track by $index">
+                         
+                         <li class="list-group-item list-group-item-{{task.status?'success':'danger'}}" ng-repeat="task in todo.tasks">
                              <div class="row">
-                                <div class="col-xs-9" ng-if="task.status==0" >{{$index+1}}. {{task.name}}</div>
-                                <div class="col-xs-9" ng-if="task.status==1" ><s>{{$index+1}}. {{task.name}}</s></div>
-                                <div class="col-xs-1">
-                                    <button ng-if="task.status==0" class="btn btn-info btn-block" ng-click="todo.setStatus($index)">Pending</button>
-                                    <div ng-if="task.status==1" class="btn btn-success ">Completed</div>
+
+                                <div class="col-xs-8" ng-if="task.status==0" >
+                                    {{$index+1}}. {{task.name}}
                                 </div>
-                                <div class="col-xs-1"> <button class="btn btn-warning btn-block" ng-click="todo.editTask($index)">Edit</button></div>
-                                <div class="col-xs-1"><button class="btn btn-danger btn-block" ng-click="todo.deleteTask($index)">Delete</button></div>
-                                
+                                <div class="col-xs-8" ng-if="task.status==1" >
+                                    <s>{{$index+1}}. {{task.name}}</s>
+                                </div>
+
+                                <div class="col-xs-4 row">
+                                    <div class="col-xs-offset-2 col-xs-2">
+                                        <button ng-if="task.status==0" class="btn btn-info btn-block glyphicon glyphicon-unchecked" ng-click="todo.setStatus(task.id)"></button>
+                                        <div ng-if="task.status==1" class="btn btn-success glyphicon glyphicon-ok"></div>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button class="btn btn-info btn-block glyphicon glyphicon-chevron-up" ng-click="todo.moveUp(task.id)"></button>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button class="btn btn-info btn-block glyphicon glyphicon-chevron-down" ng-click="todo.moveDown(task.id)"></button>
+                                    </div>
+                                    <div class="col-xs-2"> 
+                                        <button class="btn btn-warning btn-block glyphicon glyphicon-edit" ng-click="todo.editTask(task.id)"></button>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button class="btn btn-danger btn-block glyphicon glyphicon-remove" ng-click="todo.deleteTask(task.id)"></button>
+                                    </div>
+
+                                </div>
+
                              </div>
                          </li>
                          <!--<li class="list-group-item">Task2</li>-->
