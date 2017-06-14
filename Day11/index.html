@@ -3,41 +3,44 @@
         <script src="angular.js"></script>
         <script src="app.js"></script>
          <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+         <link rel="stylesheet" href="style.css">
          <title>angular controller</title>
     </head>
-    <body>
+    <body class="bg-primary ">
+        <div class="brownhill ">Todo List</div>
+        <br>
 
         <div ng-controller="firstCtrl as todo">
              <div class="row">
-                 <div class="col-xs-6">
-                     <input type="text" class="form-control" ng-model="todo.task" >
+                 <div class="col-xs-offset-2 col-xs-4">
+                     <input type="text" class="form-control " ng-model="todo.task" >
                  </div>
-                 <div class="col-xs-6">
-                     <button ng-if="!todo.editMode" class="btn btn-success btn-block" ng-click="todo.task && todo.addTask()">Add Task</button>
-                     <button ng-if="todo.editMode" class="btn btn-info btn-block" ng-click="todo.task && todo.updateTask()">Update Task</button>
+                 <div class="col-xs-4">
+                     <button ng-if="!todo.editMode" class="btn btn-success btn-block glyphicon glyphicon-plus task-btn" ng-click="todo.task && todo.addTask()">     Add Task</button>
+                     <button ng-if="todo.editMode" class="btn btn-info btn-block glyphicon glyphicon-pencil task-btn" ng-click="todo.task && todo.updateTask()">     Update Task</button>
                  </div>
 
 
              </div>
              <div class="row">
                  <div class="col-xs-12">
-                     <div class="btn btn-default btn-block">{{todo.completedTasks}}/{{todo.totalTasks}} Completed</div>
+                     <div class="btn btn-primary btn-block task">{{todo.completedTasks}}/{{todo.totalTasks}} Tasks Completed</div>
                      <ul class="list-group">
                          
                          <li class="list-group-item list-group-item-{{task.status?'success':'danger'}}" ng-repeat="task in todo.tasks">
                              <div class="row">
 
-                                <div class="col-xs-8" ng-if="task.status==0" >
-                                    {{$index+1}}. {{task.name}}
+                                <div class="col-xs-8 disney2" ng-if="task.status==0" >
+                                     {{task.name}}
                                 </div>
-                                <div class="col-xs-8" ng-if="task.status==1" >
-                                    <s>{{$index+1}}. {{task.name}}</s>
+                                <div class="col-xs-8 disney2" ng-if="task.status==1" >
+                                    <s>{{task.name}}</s>
                                 </div>
 
                                 <div class="col-xs-4 row">
                                     <div class="col-xs-offset-2 col-xs-2">
                                         <button ng-if="task.status==0" class="btn btn-info btn-block glyphicon glyphicon-unchecked" ng-click="todo.setStatus(task.id)"></button>
-                                        <div ng-if="task.status==1" class="btn btn-success glyphicon glyphicon-ok"></div>
+                                        <div ng-if="task.status==1" class="btn btn-success glyphicon glyphicon-check"></div>
                                     </div>
                                     <div class="col-xs-2">
                                         <button class="btn btn-info btn-block glyphicon glyphicon-chevron-up" ng-click="todo.moveUp(task.id)"></button>

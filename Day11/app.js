@@ -79,7 +79,7 @@ function firstCtrl(){
         if(j!=0){
              var tempObject = todo.tasks.splice(j-1, 1, todo.tasks[j])[0];
              console.log(tempObject);
-             console.log(todo.tasks.splice(j, 1, tempObject));
+             console.log(todo.tasks.splice(j, 1, tempObject))   ;
         }
        
         

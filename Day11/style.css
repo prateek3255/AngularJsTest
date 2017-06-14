@@ -1,0 +1,44 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url(Brownhill_Script.ttf);
+}
+
+@font-face {
+    font-family: disney1;
+    src: url(Disney.ttf);
+}
+
+@font-face {
+    font-family: disney2;
+    src: url(DisneyUI.ttf);
+}
+
+.brownhill {
+    font-family: myFirstFont;
+    text-align: center;
+    font-size:58px
+}
+
+.task{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+}
+
+.task-btn{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.disney1{
+    font-family: disney1;
+    font-size: 35px;
+}
+.disney2{
+    font-family: disney2;
+    font-size: 30px;
+}
+
+.blueclr{
+    background: #4DC8FA;
+}
