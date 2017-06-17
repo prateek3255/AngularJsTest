@@ -10,6 +10,7 @@ function firstCtrl(){
     todo.totalTasks=0;
     todo.completedTasks=0;
     cId=0;
+    todo.check=0;
     // taskObj={};
     
 

@@ -1,7 +1,15 @@
-angular.module("services",[])
+angular.module("services",['ngRoute'])
+.config(function($routeProvider){
+
+$routeProvider
+    .when("/",{templateUrl:"home.html"})
+    .when("/about",{templateUrl:"about.html"})
+    .otherwise({redirectTo:"/"})
+})
 .controller("firstCtrl",firstCtrl)
 .controller("secondCtrl",secondCtrl)
 .factory("dataService",dataService)
+
 
 function dataService(){
     return {};
@@ -9,7 +17,7 @@ function dataService(){
 
 function firstCtrl(dataService){
     var first=this;
-    firs.person=dataService;
+    first.person=dataService;
     first.person.name="xyz";
     console.log("first");
 }

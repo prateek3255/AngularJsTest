@@ -1,0 +1,30 @@
+@font-face {
+    font-family: TicTacToe;
+    src: url(RoofRunnersbold-it.ttf);
+}
+
+#child {
+    
+    height :400px;
+    width: 400px;
+    background:blue;
+    margin-top:100px;
+    margin-left: 470px;
+}
+
+.head{
+    text-align: center;
+    font-family: TicTacToe;
+    font-size: 50px;
+    color: black;
+}
+.button{
+    color:black;
+    font-size: 45px;
+    width:70px;
+    height: 70px;
+    background: blue;
+}
+.gray{
+    background: black;
+}
