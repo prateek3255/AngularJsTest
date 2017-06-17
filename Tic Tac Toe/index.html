@@ -67,6 +67,8 @@
                 </div>
 
             </div>
+            <br>
+            <button class="btn btn-primary reset" ng-click="t.reset()">Reset</button>
             
         
             <br><br>
@@ -77,6 +79,7 @@
             <div style="text-align: center;" ng-if="t.win>0">
                 <h1 style="color: white" ng-if="t.win==1">Player 1 wins!!</h1>
                 <h1 style="color: white" ng-if="t.win==2">Player 2 wins!!</h1>
+                <h1 style="color: white" ng-if="t.win==3">It's a tie!!</h1>
             </div>
         </div>
 

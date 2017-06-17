@@ -28,3 +28,12 @@
 .gray{
     background: black;
 }
+
+.reset{
+    font-size:30px;
+    margin-left:620px;
+    background: blue;
+    color:black;
+    font-weight: bold;
+    
+}
