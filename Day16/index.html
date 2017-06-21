@@ -1,0 +1,42 @@
+<html ng-app="firebaseApp">
+    <head>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="app.js"></script>
+         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+         <link rel="stylesheet" href="style.css">
+         <title>angular controller</title>
+         <script src="bower_components/angularfire/dist/angularfire.js"></script>
+         <script src="bower_components/firebase/firebase.js"></script>
+
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCXP4QiXRSFDS1QLJfYGz-e48_fqpFdF2g",
+    authDomain: "testing-82605.firebaseapp.com",
+    databaseURL: "https://testing-82605.firebaseio.com",
+    projectId: "testing-82605",
+    storageBucket: "testing-82605.appspot.com",
+    messagingSenderId: "658282398352"
+  };
+  firebase.initializeApp(config);
+</script>
+    </head>
+    <body>
+
+        <div ng-controller="firstCtrl as todo">
+            <input type="text" ng-model="todo.name">
+            <input type="text" ng-model="todo.age">
+            <button ng-click="todo.add()" class="btn btn-primary">Add</button>
+            
+             <div ng-repeat="student in todo.students">
+
+                 {{$index}} {{student.name}} {{student.age}} <button ng-click="todo.delete($index)" class="btn btn-danger">delete</button>
+             </div>
+
+        </div>
+    </body>
+
+
+        
+    
+</html>
