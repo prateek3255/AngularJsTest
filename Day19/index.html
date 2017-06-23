@@ -1,0 +1,30 @@
+<html ng-app="todoApp">
+    <head>
+        <script src="angular.js"></script>
+        <script src="app.js"></script>
+         
+         <title>angular controller</title>
+    </head>
+    <body class="bg-primary ">
+        <div ng-controller="firstCtrl as todo"> 
+
+            <input type="text" ng-model="todo.search.name">  
+            <input type="text" ng-model="todo.search.region">  
+            {{todo.search}}
+            <input type="radio" ng-model="todo.model" ng-value="{region:'Europe'}" ng-checked="true">Test
+            <input type="radio" ng-model="todo.model" ng-value="{region:'Asia'}"> Test
+            <!--<input type="radio" ng-model="todo.model" ng-value="2"> Test-->
+
+            <input type="checkbox" ng-model="todo.check">Check
+            {{todo.model}} {{todo.check}}
+            <div ng-repeat="nations in todo.nations | filter:todo.model | orderBy:'name'">
+                {{$index+1}}. {{nations.name}} | {{nations.region}}
+            </div>
+        </div>
+
+    </body>
+
+
+        
+    
+</html>
