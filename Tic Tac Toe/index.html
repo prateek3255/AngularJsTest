@@ -1,88 +1,36 @@
 <html ng-app="tictactoe">
     <head>
         <title>Tic Tac Toe</title>
-        <script src="angular.js"></script>
-        <script src="app.js"></script>
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-        <link rel="stylesheet" href="style.css">
+         <link rel="stylesheet" href="bower_components/bootstrap-social/bootstrap-social.css">
+         <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
+         <link rel="stylesheet" href="style.css">
+         <link rel="stylesheet" href="animate.css">
+         <script src="angular.js"></script>
+        <script src="angular-route.js"></script>
+        <script src="app.js"></script>
+        <script src="firebase.js"></script>
+        <script src="angularfire.js"></script>
+        <script src="app.js"></script>
+        <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBx4vk3vAO6YpOg52bdpzlJL_J2k3LNQA0",
+            authDomain: "tic-tac-toe-3eed7.firebaseapp.com",
+            databaseURL: "https://tic-tac-toe-3eed7.firebaseio.com",
+            projectId: "tic-tac-toe-3eed7",
+            storageBucket: "tic-tac-toe-3eed7.appspot.com",
+            messagingSenderId: "65506646854"
+        };
+        firebase.initializeApp(config);
+        </script>
     </head>
     <body style="background: black;">
-        
-
-        <div ng-controller="tic as t" id="parent" >
-            <div id="child">
-                <h1 class="head">Tic Tac Toe</h1>
-                <br>
-                <div class="row">
-                    <div class="col-xs-offset-1 col-xs-10 gray">.</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-offset-1 col-xs-10 row gray">
-                        <div class="col-xs-4">
-                            <button class="btn btn-primary button" ng-click="t.changeState(0)">{{t.buttons[0].value}}</button>
-                        </div>
-                        <div class="col-xs-4">
-                            <button class="btn btn-primary button" ng-click="t.changeState(1)">{{t.buttons[1].value}}</button>
-                        </div>
-                        <div class="col-xs-4">
-                            <button class="btn btn-primary button" ng-click="t.changeState(2)">{{t.buttons[2].value}}</button>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="row">
-                    <div class="col-xs-offset-1 col-xs-10 gray">.</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-offset-1 col-xs-10 row gray">
-                        <div class="col-xs-4">
-                            <button class="btn btn-primary button" ng-click="t.changeState(3)">{{t.buttons[3].value}}</button>
-                        </div>
-                        <div class="col-xs-4">
-                            <button class="btn btn-primary button" ng-click="t.changeState(4)">{{t.buttons[4].value}}</button>
-                        </div>
-                        <div class="col-xs-4">
-                            <button class="btn btn-primary button" ng-click="t.changeState(5)">{{t.buttons[5].value}}</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-offset-1 col-xs-10 gray">.</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-offset-1 col-xs-10 row gray">
-                        <div class="col-xs-4">
-                            <button class="btn btn-primary button" ng-click="t.changeState(6)">{{t.buttons[6].value}}</button>
-                        </div>
-                        <div class="col-xs-4">
-                            <button class="btn btn-primary button" ng-click="t.changeState(7)">{{t.buttons[7].value}}</button>
-                        </div>
-                        <div class="col-xs-4">
-                            <button class="btn btn-primary button" ng-click="t.changeState(8)">{{t.buttons[8].value}}</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-offset-1 col-xs-10 gray" >.</div>
-                </div>
-
-            </div>
-            <br>
-            <button class="btn btn-primary reset" ng-click="t.reset()">Reset</button>
+        <ng-view>
             
-        
-            <br><br>
-            <div style="text-align: center;" ng-if="t.win==0">
-                <h1 style="color: white" ng-if="t.player">Player 1's turn</h1>
-                <h1 style="color: white" ng-if="!t.player">Player 2's turn</h1>
-            </div>
-            <div style="text-align: center;" ng-if="t.win>0">
-                <h1 style="color: white" ng-if="t.win==1">Player 1 wins!!</h1>
-                <h1 style="color: white" ng-if="t.win==2">Player 2 wins!!</h1>
-                <h1 style="color: white" ng-if="t.win==3">It's a tie!!</h1>
-            </div>
-        </div>
+        </ng-view>
 
+        
 
     </body>
 </html>

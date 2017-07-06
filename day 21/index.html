@@ -1,0 +1,27 @@
+<html ng-app="todoApp">
+    <head>
+        <script src="angular.js"></script>
+        <script src="app.js"></script>
+         
+         <title>angular api</title>
+    </head>
+
+
+    <body class="bg-primary ">
+        <div ng-controller="firstCtrl as todo">
+            <!--<img ng-src="{{todo.user.picture.medium}}" alt="">
+            <h1>{{todo.user.name.first}} {{todo.user.name.last}}</h1>-->
+            <input type="text" ng-model="todo.search">
+            <button ng-click="todo.getSuperhero()">get</button>
+            <div ng-repeat="superhero in todo.superheroes">
+                <h2>{{superhero.name}}</h2>
+                <img src="{{superhero.thumbnail.path}}.{{superhero.thumbnail.extension}}" alt="">
+            </div>
+        </div>
+       
+    </body>
+
+
+        
+    
+</html>

@@ -1,5 +1,112 @@
-angular.module("tictactoe",[])
+angular.module("tictactoe",['ngRoute','firebase'])
+.config(function($routeProvider){
+
+    $routeProvider
+    .when("/",{templateUrl:"views/login.html"})
+    .when("/game",{templateUrl:"views/game.html"})
+    .when("/leaderboard",{templateUrl:"views/leaderboard.html"})
+    // .otherwise({redirectto})
+})
 .controller("tic",tic)
+.controller("loginCtrl",loginCtrl)
+.controller("leaderCtrl",leaderCtrl)
+
+function loginCtrl($firebaseAuth,$location,$firebaseArray){
+    var login=this;
+    var auth =  $firebaseAuth();
+    login.loginWithGoogle=function(){
+        var promise = auth.$signInWithPopup("google")
+
+        promise.then(function(result) {
+            console.log("Signed in as:", result);
+            var leaderRef=firebase.database().ref("leaderboard");
+            var leaderboard=$firebaseArray(leaderRef);
+            var present = false;
+            leaderboard.$loaded().then(function(){
+                for(i=0;i<leaderboard.length;i++){
+                    if(leaderboard[i].uid==result.user.uid){
+                        present=true;
+                    }
+                }
+                if(!present){
+                    var player={};
+                    player.uid=result.user.uid;
+                    player.displayName=result.user.displayName;
+                    player.photoURL=result.user.photoURL;
+                    player.score=0;
+                    player.challenge=0;
+                    leaderboard.$add(player);
+                }
+
+            });
+            
+            $location.path("/leaderboard");
+        })
+        .catch(function(error) {
+            console.error("Authentication failed:", error);
+        }); 
+    }   
+
+
+}
+
+function leaderCtrl($firebaseAuth,$location,$firebaseArray){
+    var auth =  $firebaseAuth();
+    var leader=this;
+    auth.$onAuthStateChanged(function(user){
+        if(user){
+            leader.user=user;
+            for(i=0;i<leader.user.displayName.length;i++){
+                if(leader.user.displayName[i]==" "){
+                    leader.dName=leader.user.displayName.substr(0,i);
+                    break;
+                }
+            }
+        }
+        else{
+            $location.path("/");
+        }
+    });
+   
+    var leaderRef=firebase.database().ref("leaderboard");
+    var onlineRef=firebase.database().ref("online");
+    var leaderboard=$firebaseArray(leaderRef);
+    leader.leaderboards=leaderboard;
+    leader.leaderboards.$loaded().then(function(){
+        var connectedRef = firebase.database().ref(".info/connected");
+        connectedRef.on("value", function(snap) {
+            if (snap.val() === true) {
+                console.log("connected");
+
+                var person={};
+                person.uid=leader.user.uid;
+                person.photoURL=leader.user.photoURL;
+                person.displayName=leader.user.displayName;
+
+                var con = onlineRef.push(person);
+
+                con.onDisconnect().remove();
+                
+            } else {
+                
+            }
+        });
+
+    });
+    var onlineUsersRef=firebase.database().ref("online");
+    onlineUsers=$firebaseArray(onlineUsersRef);
+    leader.onlineUsers=onlineUsers;
+    leader.request=function(index){
+        for(i=0;i<leader.leaderboards.length;i++){
+            if(leader.leaderboards[i].uid==leader.onlineUsers[index].uid)
+                break;
+        }
+        leader.leaderboards[i].challenge=leader.user.displayName;
+        leader.leaderboards.$save(i);
+    }
+   
+}
+
 
 function tic(){
     var t=this;

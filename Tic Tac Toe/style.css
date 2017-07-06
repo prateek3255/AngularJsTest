@@ -9,7 +9,8 @@
     width: 400px;
     background:blue;
     margin-top:100px;
-    margin-left: 470px;
+    margin-left: 35%;
+    position: relative;
 }
 
 .head{
@@ -17,6 +18,14 @@
     font-family: TicTacToe;
     font-size: 50px;
     color: black;
+}
+
+.head-tic{
+    text-align: center;
+    font-family: TicTacToe;
+    font-size: 50px;
+    color: white;
+
 }
 .button{
     color:black;
@@ -31,9 +40,45 @@
 
 .reset{
     font-size:30px;
-    margin-left:620px;
+    margin-left:45%;
     background: blue;
     color:black;
     font-weight: bold;
+    position: relative;
     
+}
+
+.login-head{
+    color:white;
+     text-align: center;
+    font-size:25px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.center{
+    text-align: center;
+}
+
+.white{
+    color:white;
+}
+
+.image{
+    height: 100px;
+    width: 100px;
+}
+
+.leader-head{
+    text-align: center;
+    font-family: TicTacToe;
+    font-size: 50px;
+    color: white;
+     -moz-animation-duration: 2s;
+     -moz-animation-delay: 2s;
+    /*animation-iteration-count: infinite;*/
+}
+
+.leader-image{
+    height: 50px;
+    width: 50px;
 }
