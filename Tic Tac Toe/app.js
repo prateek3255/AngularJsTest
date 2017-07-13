@@ -3,13 +3,14 @@ angular.module("tictactoe",['ngRoute','firebase'])
 
     $routeProvider
     .when("/",{templateUrl:"views/login.html"})
-    .when("/game",{templateUrl:"views/game.html"})
+    .when("/game/:gameId",{templateUrl:"views/game.html"})
     .when("/leaderboard",{templateUrl:"views/leaderboard.html"})
     // .otherwise({redirectto})
 })
 .controller("tic",tic)
 .controller("loginCtrl",loginCtrl)
 .controller("leaderCtrl",leaderCtrl)
+
 
 function loginCtrl($firebaseAuth,$location,$firebaseArray){
     var login=this;
@@ -35,6 +36,8 @@ function loginCtrl($firebaseAuth,$location,$firebaseArray){
                     player.photoURL=result.user.photoURL;
                     player.score=0;
                     player.challenge=0;
+                    player.accept=leader.user.uid;
+                    player.gameId=0;
                     leaderboard.$add(player);
                 }
 
@@ -67,12 +70,27 @@ function leaderCtrl($firebaseAuth,$location,$firebaseArray){
             $location.path("/");
         }
     });
-   
+   leader.leaderIndex=0;
+   leader.loaded=false;
+   leader.count=false;
+   leader.ch=false;
+    var gameRef=firebase.database().ref("game");
+    var game=$firebaseArray(gameRef);
+    leader.game=game;
     var leaderRef=firebase.database().ref("leaderboard");
     var onlineRef=firebase.database().ref("online");
     var leaderboard=$firebaseArray(leaderRef);
     leader.leaderboards=leaderboard;
     leader.leaderboards.$loaded().then(function(){
+        for(i=0;i<leader.leaderboards.length;i++){
+            if(leader.leaderboards[i].uid==leader.user.uid)
+                break;
+        }
+        leader.leaderIndex=i;
+        leader.leaderboards[leader.leaderIndex].challenge=0;
+        leader.leaderboards[leader.leaderIndex].accept=leader.user.uid;
+        leader.leaderboards.$save(leader.leaderIndex);
+        leader.loaded=true;
         var connectedRef = firebase.database().ref(".info/connected");
         connectedRef.on("value", function(snap) {
             if (snap.val() === true) {
@@ -92,10 +110,25 @@ function leaderCtrl($firebaseAuth,$location,$firebaseArray){
             }
         });
 
+     var ref = firebase.database().ref("leaderboard");
+     ref.orderByChild("accept").equalTo(leader.user.uid).on("value", function(snapshot) {
+        if(leader.count&&!leader.ch){
+             $location.path("/game/"+leader.leaderboards[leader.leaderIndex].gameId);
+             console.log("working");
+        
+        }
+            
+           
+         
+         leader.count=!leader.count;
+             
+});
+
     });
     var onlineUsersRef=firebase.database().ref("online");
     onlineUsers=$firebaseArray(onlineUsersRef);
     leader.onlineUsers=onlineUsers;
+
     leader.request=function(index){
         for(i=0;i<leader.leaderboards.length;i++){
             if(leader.leaderboards[i].uid==leader.onlineUsers[index].uid)
@@ -103,7 +136,31 @@ function leaderCtrl($firebaseAuth,$location,$firebaseArray){
         }
         leader.leaderboards[i].challenge=leader.user.displayName;
         leader.leaderboards.$save(i);
+        leader.ch=true;
     }
+
+    leader.declineRequest=function(){
+        leader.leaderboards[leader.leaderIndex].challenge=0;
+        leader.leaderboards.$save(leader.leaderIndex);
+    }
+
+    leader.acceptRequest=function(){
+        for(i=0;i<leader.leaderboards.length;i++){
+            if(leader.leaderboards[leader.leaderIndex].challenge==leader.leaderboards[i].displayName)
+                break;
+        }
+        leader.leaderboards[i].accept=true;
+        ran=Math.round(Math.random()*100000);
+        leader.leaderboards[leader.leaderIndex].gameId=ran;
+        leader.leaderboards[i].gameId=ran;
+        leader.leaderboards.$save(i);
+        leader.leaderboards.$save(leader.leaderIndex);
+        leader.game.$add({"id":ran});
+        $location.path("/game/"+ran);
+        
+    }
+
+   
    
 }
 
@@ -200,12 +257,13 @@ function tic(){
     }
 
     t.reset=function(){
-        for(i=0;i<9;i++){
-            t.buttons[i].state=true;
-            t.buttons[i].value="";
-        }
-        t.win=0;
-        t.player=true;
-        tie=true;
+        // for(i=0;i<9;i++){
+        //     t.buttons[i].state=true;
+        //     t.buttons[i].value="";
+        // }
+        // t.win=0;
+        // t.player=true;
+        // tie=true;
+        
     }
 } 
